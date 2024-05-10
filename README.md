@@ -1,0 +1,4 @@
+### Azure Migration to Managed Identity
+
+OpenShift can be configured to use temporary credentials for workload components with [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/).
+In this model, the OpenShift cluster signs Kubernetes ServiceAccount tokens which can be trusted by an external OIDC identity provider. A component such as an operator running on the cluster can exchange the signed ServiceAccount token mounted into its Pod volume for an Azure Active Directory (AD) access token using [Azure Identity SDKs](https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/azidentity). This process also automates requesting and refreshing of credentials. The ServiceAccount token used by a Pod is rotated by the kubelet on the node where Pod is running when the Pod's ServiceAccount token is approaching expiry. ServiceAccount tokens are valid for one hour.
